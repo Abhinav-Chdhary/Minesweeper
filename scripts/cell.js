@@ -3,7 +3,7 @@ export default class Cell {
     this.x = x;
     this.y = y;
     this.side = side;
-    this.text = "";
+    this.text = "T";
     this.isRevealed = false;
   }
   drawCell(context) {
@@ -15,7 +15,7 @@ export default class Cell {
     context.strokeRect(this.x, this.y, this.side + 1, this.side + 1);
 
     if (this.isRevealed) {
-      drawText(context);
+      this.drawText(context);
     }
   }
   drawText(context) {
@@ -36,5 +36,8 @@ export default class Cell {
       py >= this.y &&
       py <= this.y + this.side
     );
+  }
+  setReveal(){
+    this.isRevealed = true;
   }
 }
