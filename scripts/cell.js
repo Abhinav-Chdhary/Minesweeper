@@ -3,7 +3,7 @@ export default class Cell {
     this.x = x;
     this.y = y;
     this.side = side;
-    this.text = "T";
+    this.text = "0";
     this.isRevealed = false;
   }
   drawCell(context) {
@@ -37,7 +37,10 @@ export default class Cell {
       py <= this.y + this.side
     );
   }
-  setReveal(){
+  setReveal() {
     this.isRevealed = true;
+  }
+  setText(text) {
+    this.text = text;
   }
 }

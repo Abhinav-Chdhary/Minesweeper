@@ -1,4 +1,5 @@
 import { redraw, getRelativeMousePosition } from "./scripts/util";
+import { handleClickReveal } from "./scripts/revealer";
 import Cell from "./scripts/cell";
 import "./style.css";
 
@@ -18,22 +19,13 @@ window.onload = function () {
       grid[i][j] = new Cell(side * i, side * j, side);
     }
   }
+  grid[0][0].setText("3");
+  grid[n - 1][n - 1].setText("3");
 
   canvas.onclick = function (e) {
     let mouse = getRelativeMousePosition(e, canvas);
-    handleClickReveal(grid, mouse, context);
+    handleClickReveal(grid, mouse, context, n);
   };
 
   redraw(context, grid, n);
 };
-
-function handleClickReveal(grid, mouse, context) {
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      if (grid[i][j].isCell(mouse.x, mouse.y)) {
-        grid[i][j].setReveal();
-      }
-    }
-  }
-  redraw(context, grid, n);
-}
