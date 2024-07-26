@@ -1,24 +1,26 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import Cell from "./scripts/cell";
+import "./style.css";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+let grid = [], n = 10, side = 50;
 
-setupCounter(document.querySelector('#counter'))
+window.onload = function () {
+  let canvas = document.getElementById("canvas");
+  let context = canvas.getContext("2d");
+
+  for (let i = 0; i < n; i++) {
+    grid[i] = [];
+    for (let j = 0; j < n; j++) {
+      grid[i][j] = new Cell(i+side*i, j+side*j, side);
+    }
+  }
+
+  redraw(context);
+};
+
+function redraw(context) {
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      grid[i][j].drawCell(context);
+    }
+  }
+}
