@@ -7,13 +7,15 @@ let grid = [],
   side = 50;
 
 window.onload = function () {
-  let canvas = document.getElementById("canvas");
+  const canvas = document.getElementById("canvas");
   let context = canvas.getContext("2d");
+  canvas.width = n * side;
+  canvas.height = n * side;
 
   for (let i = 0; i < n; i++) {
     grid[i] = [];
     for (let j = 0; j < n; j++) {
-      grid[i][j] = new Cell(i + side * i, j + side * j, side);
+      grid[i][j] = new Cell(side * i, side * j, side);
     }
   }
 
