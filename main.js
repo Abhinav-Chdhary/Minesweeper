@@ -1,7 +1,8 @@
 import { redraw, getRelativeMousePosition } from "./scripts/util";
-import { handleClickReveal } from "./scripts/revealer";
+import { handleClickReveal, mineCheckSum } from "./scripts/revealer";
 import Cell from "./scripts/cell";
 import "./style.css";
+import { mineSetter } from "./scripts/mineSetter";
 
 let grid = [],
   n = 10,
@@ -13,19 +14,21 @@ window.onload = function () {
   canvas.width = n * side;
   canvas.height = n * side;
 
+  // create grid
   for (let i = 0; i < n; i++) {
     grid[i] = [];
     for (let j = 0; j < n; j++) {
       grid[i][j] = new Cell(side * i, side * j, side);
     }
   }
-  grid[0][0].setText("3");
-  grid[n - 1][n - 1].setText("3");
+
+  //set mines
+  mineSetter(grid, n, (n * n) / 5);
+  mineCheckSum(context, grid, n);
+  redraw(context, grid, n);
 
   canvas.onclick = function (e) {
     let mouse = getRelativeMousePosition(e, canvas);
     handleClickReveal(grid, mouse, context, n);
   };
-
-  redraw(context, grid, n);
 };
