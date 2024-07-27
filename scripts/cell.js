@@ -1,3 +1,5 @@
+import { drawFlag } from "./util";
+
 export default class Cell {
   constructor(x, y, side) {
     this.x = x;
@@ -5,12 +7,16 @@ export default class Cell {
     this.side = side;
     this.text = " ";
     this.isRevealed = false;
+    this.isFlagged = false;
   }
   drawCell(context) {
     context.fillStyle = "white";
-    if(this.isRevealed)
-      context.fillStyle = "#eed74b";
+    if (this.isRevealed) context.fillStyle = "#eed74b";
     context.fillRect(this.x, this.y, this.side, this.side);
+
+    if (this.isFlagged) {
+      drawFlag(context, this.x, this.y, this.side);
+    }
 
     context.strokeStyle = "black";
     context.lineWidth = 2;
@@ -47,5 +53,8 @@ export default class Cell {
   }
   setText(text) {
     this.text = text;
+  }
+  toggleFlagged() {
+    this.isFlagged = !this.isFlagged;
   }
 }

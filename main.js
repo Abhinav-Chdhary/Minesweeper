@@ -4,6 +4,7 @@ import { mineCheckSum } from "./scripts/mineCheckSum";
 import Cell from "./scripts/cell";
 import "./style.css";
 import { mineSetter } from "./scripts/mineSetter";
+import { handleRightClick } from "./scripts/flagger";
 
 let grid = [],
   n = 10,
@@ -49,4 +50,9 @@ window.onload = function () {
     let mouse = getRelativeMousePosition(e, canvas);
     handleClickReveal(grid, mouse, context, n);
   };
+  canvas.oncontextmenu = function(e){
+    e.preventDefault();
+    let mouse = getRelativeMousePosition(e, canvas);
+    handleRightClick(grid, mouse, context, n);
+  }
 };

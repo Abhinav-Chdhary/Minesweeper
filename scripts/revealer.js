@@ -39,7 +39,9 @@ export function handleClickReveal(grid, mouse, context, n) {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       if (grid[i][j].isCell(mouse.x, mouse.y)) {
-        if (grid[i][j].text === "M") console.log("Game over!!");
+        // if flagged then ignore the cell
+        if (grid[i][j].isFlagged) break;
+        else if (grid[i][j].text === "M") console.log("Game over!!");
         else {
           grid[i][j].setReveal();
           bfs(i, j, grid, n);
