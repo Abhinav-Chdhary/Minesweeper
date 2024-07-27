@@ -10,22 +10,39 @@ let grid = [],
 
 window.onload = function () {
   const canvas = document.getElementById("canvas");
-  let context = canvas.getContext("2d");
-  canvas.width = n * side;
-  canvas.height = n * side;
+  const context = canvas.getContext("2d");
 
-  // create grid
-  for (let i = 0; i < n; i++) {
-    grid[i] = [];
-    for (let j = 0; j < n; j++) {
-      grid[i][j] = new Cell(side * i, side * j, side);
+  const sizeInput = document.getElementById("sizeOfGrid");
+  const difficultyInput = document.getElementById("difficulty");
+
+  const initializeGrid = () => {
+    n = parseInt(sizeInput.value);
+    let difficultyFactor;
+
+    if (difficultyInput.value === "easy") difficultyFactor = 1 / 6;
+    else if (difficultyInput.value === "med") difficultyFactor = 1 / 5;
+    else difficultyFactor = 1 / 4;
+
+    canvas.width = n * side;
+    canvas.height = n * side;
+
+    grid = [];
+    for (let i = 0; i < n; i++) {
+      grid[i] = [];
+      for (let j = 0; j < n; j++) {
+        grid[i][j] = new Cell(side * i, side * j, side);
+      }
     }
-  }
 
-  //set mines
-  mineSetter(grid, n, (n * n) / 5);
-  mineCheckSum(context, grid, n);
-  redraw(context, grid, n);
+    mineSetter(grid, n, n * n * difficultyFactor);
+    mineCheckSum(context, grid, n);
+    redraw(context, grid, n);
+  };
+
+  sizeInput.addEventListener("change", initializeGrid);
+  difficultyInput.addEventListener("change", initializeGrid);
+
+  initializeGrid();
 
   canvas.onclick = function (e) {
     let mouse = getRelativeMousePosition(e, canvas);

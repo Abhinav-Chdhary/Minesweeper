@@ -27,6 +27,7 @@ function bfs(r, c, grid, n) {
         newCol < n &&
         !visited[newRow][newCol]
       ) {
+        if (grid[newRow][newCol].text === "M") continue;
         grid[newRow][newCol].setReveal();
         queue.push({ row: newRow, col: newCol });
       }
@@ -38,8 +39,11 @@ export function handleClickReveal(grid, mouse, context, n) {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       if (grid[i][j].isCell(mouse.x, mouse.y)) {
-        grid[i][j].setReveal();
-        bfs(i, j, grid, n);
+        if (grid[i][j].text === "M") console.log("Game over!!");
+        else {
+          grid[i][j].setReveal();
+          bfs(i, j, grid, n);
+        }
       }
     }
   }
