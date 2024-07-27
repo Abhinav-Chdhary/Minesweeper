@@ -1,7 +1,7 @@
 import { redraw } from "./util";
 
-let directionX = [-1, -1, 0, 1, 1, 1, 0, -1];
-let directionY = [0, 1, 1, 1, 0, -1, -1, -1];
+let directionX = [-1, 0, 1, 0];
+let directionY = [0, 1, 0, -1];
 
 function bfs(r, c, grid, n) {
   const visited = Array.from({ length: n }, () => Array(n).fill(false));
@@ -13,8 +13,9 @@ function bfs(r, c, grid, n) {
     const curr = queue.shift();
     visited[curr.row][curr.col] = true;
 
+    if (grid[curr.row][curr.col].text !== symbol) continue;
     // go in all directions
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 4; i++) {
       let newRow = curr.row + directionX[i];
       let newCol = curr.col + directionY[i];
 
@@ -24,8 +25,7 @@ function bfs(r, c, grid, n) {
         newCol >= 0 &&
         newRow < n &&
         newCol < n &&
-        !visited[newRow][newCol] &&
-        grid[newRow][newCol].text === symbol
+        !visited[newRow][newCol]
       ) {
         grid[newRow][newCol].setReveal();
         queue.push({ row: newRow, col: newCol });
