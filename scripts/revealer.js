@@ -4,14 +4,12 @@ let directionX = [-1, 0, 1, 0];
 let directionY = [0, 1, 0, -1];
 
 function bfs(r, c, grid, n) {
-  const visited = Array.from({ length: n }, () => Array(n).fill(false));
   let queue = [{ row: r, col: c }];
   const symbol = grid[r][c].text;
 
   //bfs
   while (queue.length > 0) {
     const curr = queue.shift();
-    visited[curr.row][curr.col] = true;
 
     if (grid[curr.row][curr.col].text !== symbol) continue;
     // go in all directions
@@ -25,7 +23,7 @@ function bfs(r, c, grid, n) {
         newCol >= 0 &&
         newRow < n &&
         newCol < n &&
-        !visited[newRow][newCol]
+        !grid[newRow][newCol].isRevealed
       ) {
         if (grid[newRow][newCol].text === "M") continue;
         grid[newRow][newCol].setReveal();
