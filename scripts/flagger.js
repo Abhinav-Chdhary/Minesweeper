@@ -14,6 +14,7 @@ export function handleRightClick(grid, mouse, context, n) {
         // if already flagged remove it
         if (grid[i][j].isFlagged) {
           grid[i][j].toggleFlagged();
+          setCounter(flagCount + 1);
         }
         // if not flagged and not revealed we can flag it
         else if (!grid[i][j].isFlagged && !grid[i][j].isRevealed) {

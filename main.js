@@ -16,6 +16,7 @@ window.onload = function () {
 
   const sizeInput = document.getElementById("sizeOfGrid");
   const difficultyInput = document.getElementById("difficulty");
+  const flagNumberElement = document.getElementById("flagNumber");
 
   const initializeGrid = () => {
     n = parseInt(sizeInput.value);
@@ -35,8 +36,9 @@ window.onload = function () {
         grid[i][j] = new Cell(side * i, side * j, side);
       }
     }
-
-    mineSetter(grid, n, n * n * difficultyFactor);
+    const numberOfMines = Math.floor(n * n * difficultyFactor);
+    flagNumberElement.innerHTML = `${numberOfMines}`;
+    mineSetter(grid, n, numberOfMines);
     mineCheckSum(context, grid, n);
     redraw(context, grid, n);
   };
@@ -50,9 +52,9 @@ window.onload = function () {
     let mouse = getRelativeMousePosition(e, canvas);
     handleClickReveal(grid, mouse, context, n);
   };
-  canvas.oncontextmenu = function(e){
+  canvas.oncontextmenu = function (e) {
     e.preventDefault();
     let mouse = getRelativeMousePosition(e, canvas);
     handleRightClick(grid, mouse, context, n);
-  }
+  };
 };
