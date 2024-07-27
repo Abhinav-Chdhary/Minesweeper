@@ -3,11 +3,13 @@ export default class Cell {
     this.x = x;
     this.y = y;
     this.side = side;
-    this.text = "0";
+    this.text = " ";
     this.isRevealed = false;
   }
   drawCell(context) {
     context.fillStyle = "white";
+    if(this.isRevealed)
+      context.fillStyle = "#eed74b";
     context.fillRect(this.x, this.y, this.side, this.side);
 
     context.strokeStyle = "black";
@@ -22,7 +24,10 @@ export default class Cell {
     context.font = "20px Comic Sans MS";
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.fillStyle = "black";
+    if (this.text === "M") context.fillStyle = "black";
+    else if (this.text === "1") context.fillStyle = "blue";
+    else if (this.text === "2") context.fillStyle = "green";
+    else context.fillStyle = "red";
 
     const textX = this.x + this.side / 2;
     const textY = this.y + this.side / 2;

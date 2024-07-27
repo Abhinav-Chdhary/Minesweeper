@@ -1,5 +1,6 @@
 import { redraw, getRelativeMousePosition } from "./scripts/util";
-import { handleClickReveal, mineCheckSum } from "./scripts/revealer";
+import { handleClickReveal } from "./scripts/revealer";
+import { mineCheckSum } from "./scripts/mineCheckSum";
 import Cell from "./scripts/cell";
 import "./style.css";
 import { mineSetter } from "./scripts/mineSetter";
@@ -33,8 +34,8 @@ window.onload = function () {
         grid[i][j] = new Cell(side * i, side * j, side);
       }
     }
-    
-    mineSetter(grid, n, (n * n) * difficultyFactor);
+
+    mineSetter(grid, n, n * n * difficultyFactor);
     mineCheckSum(context, grid, n);
     redraw(context, grid, n);
   };
