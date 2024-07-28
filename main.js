@@ -5,10 +5,12 @@ import Cell from "./scripts/cell";
 import "./style.css";
 import { mineSetter } from "./scripts/mineSetter";
 import { handleRightClick } from "./scripts/flagger";
+import { resetTimer, startTimer } from "./scripts/timer";
 
 let grid = [],
   n = 10,
   side = 50;
+let firstClick = false;
 
 window.onload = function () {
   const canvas = document.getElementById("canvas");
@@ -17,6 +19,7 @@ window.onload = function () {
   const sizeInput = document.getElementById("sizeOfGrid");
   const difficultyInput = document.getElementById("difficulty");
   const flagNumberElement = document.getElementById("flagNumber");
+  const timerElement = document.getElementById("timer");
 
   // Retrieve stored values or set defaults
   sizeInput.value = localStorage.getItem("gridSize") || n;
@@ -48,6 +51,9 @@ window.onload = function () {
 
     localStorage.setItem("gridSize", sizeInput.value);
     localStorage.setItem("difficultyLevel", difficultyInput.value);
+
+    resetTimer(timerElement);
+    firstClick = false;
   };
 
   sizeInput.addEventListener("change", initializeGrid);
@@ -56,9 +62,14 @@ window.onload = function () {
   initializeGrid();
 
   canvas.onclick = function (e) {
+    if (!firstClick) {
+      firstClick = true;
+      startTimer(timerElement);
+    }
     let mouse = getRelativeMousePosition(e, canvas);
     handleClickReveal(grid, mouse, context, n);
   };
+
   canvas.oncontextmenu = function (e) {
     e.preventDefault();
     let mouse = getRelativeMousePosition(e, canvas);

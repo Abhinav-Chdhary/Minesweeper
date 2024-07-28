@@ -1,7 +1,10 @@
+import { resetTimer } from "./timer";
 import { redraw } from "./util";
 
 let directionX = [-1, 0, 1, 0];
 let directionY = [0, 1, 0, -1];
+
+const timerElement = document.getElementById("timer");
 
 function bfs(r, c, grid, n) {
   let queue = [{ row: r, col: c }];
@@ -39,8 +42,10 @@ export function handleClickReveal(grid, mouse, context, n) {
       if (grid[i][j].isCell(mouse.x, mouse.y)) {
         // if flagged then ignore the cell
         if (grid[i][j].isFlagged) break;
-        else if (grid[i][j].text === "M") console.log("Game over!!");
-        else {
+        else if (grid[i][j].text === "M") {
+          console.log("Game over!!");
+          resetTimer(timerElement);
+        } else {
           grid[i][j].setReveal();
           bfs(i, j, grid, n);
         }

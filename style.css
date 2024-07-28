@@ -58,10 +58,15 @@ canvas {
   display: block;
   margin: 10px auto;
 }
-input{
+input {
   width: 3em;
 }
-button, input, select {
+button {
+  user-select: none;
+}
+button,
+input,
+select {
   border-radius: 8px;
   border: 1px solid #eed74b;
   padding: 0.6em 1.2em;
@@ -72,7 +77,9 @@ button, input, select {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover, input:hover, select:hover {
+button:hover,
+input:hover,
+select:hover {
   border-color: #646cff;
 }
 button:focus,
