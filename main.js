@@ -18,6 +18,10 @@ window.onload = function () {
   const difficultyInput = document.getElementById("difficulty");
   const flagNumberElement = document.getElementById("flagNumber");
 
+  // Retrieve stored values or set defaults
+  sizeInput.value = localStorage.getItem("gridSize") || n;
+  difficultyInput.value = localStorage.getItem("difficultyLevel") || "easy";
+
   const initializeGrid = () => {
     n = parseInt(sizeInput.value);
     let difficultyFactor;
@@ -41,6 +45,9 @@ window.onload = function () {
     mineSetter(grid, n, numberOfMines);
     mineCheckSum(context, grid, n);
     redraw(context, grid, n);
+
+    localStorage.setItem("gridSize", sizeInput.value);
+    localStorage.setItem("difficultyLevel", difficultyInput.value);
   };
 
   sizeInput.addEventListener("change", initializeGrid);
