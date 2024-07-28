@@ -5,6 +5,11 @@ let directionX = [-1, 0, 1, 0];
 let directionY = [0, 1, 0, -1];
 
 const timerElement = document.getElementById("timer");
+const gameOverScreen = document.getElementById("gameOverScreen");
+
+const displayGameOver= ()=>{
+  gameOverScreen.style.display = "block";
+}
 
 function bfs(r, c, grid, n) {
   let queue = [{ row: r, col: c }];
@@ -44,6 +49,7 @@ export function handleClickReveal(grid, mouse, context, n) {
         if (grid[i][j].isFlagged) break;
         else if (grid[i][j].text === "M") {
           console.log("Game over!!");
+          displayGameOver();
           resetTimer(timerElement);
         } else {
           grid[i][j].setReveal();

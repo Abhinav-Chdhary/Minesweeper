@@ -18,19 +18,31 @@ window.onload = function () {
   const difficultyInput = document.getElementById("difficulty");
   const flagNumberElement = document.getElementById("flagNumber");
   const timerElement = document.getElementById("timer");
+  const gameOverScreen = document.getElementById("gameOverScreen");
+  const retryButton = document.getElementById("retryButton");
 
   sizeInput.value = localStorage.getItem("gridSize") || 10;
   difficultyInput.value = localStorage.getItem("difficultyLevel") || "easy";
 
   const initialize = () => {
-    const initialDetails = initializeGrid(canvas, context, sizeInput, difficultyInput, flagNumberElement, timerElement, resetTimer);
+    const initialDetails = initializeGrid(
+      canvas,
+      context,
+      sizeInput,
+      difficultyInput,
+      flagNumberElement,
+      timerElement,
+      resetTimer
+    );
     n = initialDetails.n;
     grid = initialDetails.grid;
     firstClick = false;
+    gameOverScreen.style.display = "none";
   };
 
   sizeInput.addEventListener("change", initialize);
   difficultyInput.addEventListener("change", initialize);
+  retryButton.addEventListener("click", initialize);
 
   initialize();
 

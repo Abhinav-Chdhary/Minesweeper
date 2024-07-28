@@ -9,7 +9,7 @@
   <body>
     <h1>MINESWEEPER</h1>
     <div class="formContainer">
-      <input type="number" id="sizeOfGrid" value="10" />
+      <input type="number" id="sizeOfGrid" value="10" min="3" max="20" />
       <select id="difficulty">
         <option value="easy" selected>Easy</option>
         <option value="med">Medium</option>
@@ -17,6 +17,14 @@
       </select>
       <button id="flagNumber">16</button>
       <button id="timer">:</button>
+    </div>
+    <div id="gameOverScreen">
+      <div class="gameOverContent">
+        <h1>Game OVER!</h1>
+        <button id="retryButton">
+          Retry 🔁
+        </button>
+      </div>
     </div>
     <canvas id="canvas"></canvas>
   </body>
