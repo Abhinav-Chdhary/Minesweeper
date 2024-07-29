@@ -7,9 +7,9 @@ let directionY = [0, 1, 0, -1];
 const timerElement = document.getElementById("timer");
 const gameOverScreen = document.getElementById("gameOverScreen");
 
-const displayGameOver= ()=>{
+const displayGameOver = () => {
   gameOverScreen.style.display = "block";
-}
+};
 
 function bfs(r, c, grid, n) {
   let queue = [{ row: r, col: c }];

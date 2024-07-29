@@ -6,7 +6,7 @@ export default class Cell {
     this.y = y;
     this.side = side;
     this.text = " ";
-    this.isRevealed = false;
+    this.isRevealed = true;
     this.isFlagged = false;
   }
   drawCell(context) {

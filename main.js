@@ -4,11 +4,12 @@ import { handleRightClick } from "./scripts/flagger";
 import { startTimer, resetTimer } from "./scripts/timer";
 import { initializeGrid } from "./scripts/initializeGrid";
 import "./style.css";
+import { handleFirstClick } from "./scripts/handleFirstClick";
 
 let grid = [],
   n = 10,
   side = 50;
-let firstClick = false;
+let firstClicked = false;
 
 window.onload = function () {
   const canvas = document.getElementById("canvas");
@@ -36,7 +37,7 @@ window.onload = function () {
     );
     n = initialDetails.n;
     grid = initialDetails.grid;
-    firstClick = false;
+    firstClicked = false;
     gameOverScreen.style.display = "none";
   };
 
@@ -47,11 +48,12 @@ window.onload = function () {
   initialize();
 
   canvas.onclick = function (e) {
-    if (!firstClick) {
-      firstClick = true;
-      startTimer(timerElement);
-    }
     let mouse = getRelativeMousePosition(e, canvas);
+    if (!firstClicked) {
+      firstClicked = true;
+      startTimer(timerElement);
+      handleFirstClick(grid, mouse, context, n);
+    }
     handleClickReveal(grid, mouse, context, n);
   };
 
