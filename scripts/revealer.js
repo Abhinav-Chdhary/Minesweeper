@@ -1,5 +1,6 @@
 import { resetTimer } from "./timer";
 import { redraw } from "./util";
+import { checkWin } from "./checkWin";
 
 let directionX = [-1, 0, 1, 0];
 let directionY = [0, 1, 0, -1];
@@ -51,6 +52,7 @@ export function handleClickReveal(grid, mouse, context, n) {
           console.log("Game over!!");
           displayGameOver();
           resetTimer(timerElement);
+          return;
         } else {
           grid[i][j].setReveal();
           bfs(i, j, grid, n);
@@ -58,5 +60,6 @@ export function handleClickReveal(grid, mouse, context, n) {
       }
     }
   }
+  if (checkWin(grid, n)) return;
   redraw(context, grid, n);
 }

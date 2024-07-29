@@ -27,6 +27,10 @@ export default class Cell {
     }
   }
   drawText(context) {
+    if (this.text === "M") {
+      this.drawMine(context);
+      return;
+    }
     context.font = "20px Comic Sans MS";
     context.textAlign = "center";
     context.textBaseline = "middle";
@@ -56,5 +60,41 @@ export default class Cell {
   }
   toggleFlagged() {
     this.isFlagged = !this.isFlagged;
+  }
+  drawMine(context) {
+    const radius = this.side / 4;
+    const centerX = this.x + this.side / 2;
+    const centerY = this.y + this.side / 2;
+
+    // Draw the black circle
+    context.beginPath();
+    context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+    context.fillStyle = "black";
+    context.fill();
+
+    const lineLength = radius+3; // Adjust line length as needed
+    const lineWidth = 2;
+
+    context.strokeStyle = "black";
+    context.lineWidth = lineWidth;
+
+    // Draw lines radiating from the circle's center
+    const angles = [
+      0,
+      Math.PI / 3,
+      (2 * Math.PI) / 3,
+      Math.PI,
+      (4 * Math.PI) / 3,
+      (5 * Math.PI) / 3,
+    ];
+    angles.forEach((angle) => {
+      context.beginPath();
+      context.moveTo(centerX, centerY);
+      context.lineTo(
+        centerX + lineLength * Math.cos(angle),
+        centerY + lineLength * Math.sin(angle)
+      );
+      context.stroke();
+    });
   }
 }

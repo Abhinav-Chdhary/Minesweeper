@@ -20,7 +20,8 @@ window.onload = function () {
   const flagNumberElement = document.getElementById("flagNumber");
   const timerElement = document.getElementById("timer");
   const gameOverScreen = document.getElementById("gameOverScreen");
-  const retryButton = document.getElementById("retryButton");
+  const gameWinScreen = document.getElementById("youWinScreen");
+  const retryButton = document.getElementsByClassName("retryButton");
 
   sizeInput.value = localStorage.getItem("gridSize") || 10;
   difficultyInput.value = localStorage.getItem("difficultyLevel") || "easy";
@@ -39,11 +40,13 @@ window.onload = function () {
     grid = initialDetails.grid;
     firstClicked = false;
     gameOverScreen.style.display = "none";
+    gameWinScreen.style.display = "none";
   };
 
   sizeInput.addEventListener("change", initialize);
   difficultyInput.addEventListener("change", initialize);
-  retryButton.addEventListener("click", initialize);
+  retryButton[0].addEventListener("click", initialize);
+  retryButton[1].addEventListener("click", initialize);
 
   initialize();
 
