@@ -1,6 +1,6 @@
 import { resetTimer } from "./timer";
 import { redraw } from "./util";
-import { checkWin } from "./checkWin";
+import { checkWin, revealAll } from "./checkWin";
 
 let directionX = [-1, 0, 1, 0];
 let directionY = [0, 1, 0, -1];
@@ -49,7 +49,7 @@ export function handleClickReveal(grid, mouse, context, n) {
         // if flagged then ignore the cell
         if (grid[i][j].isFlagged) break;
         else if (grid[i][j].text === "M") {
-          console.log("Game over!!");
+          revealAll(context, grid, n);
           displayGameOver();
           resetTimer(timerElement);
           return;
@@ -60,6 +60,6 @@ export function handleClickReveal(grid, mouse, context, n) {
       }
     }
   }
-  if (checkWin(grid, n)) return;
+  if (checkWin(context, grid, n)) return;
   redraw(context, grid, n);
 }
