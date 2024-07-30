@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image" href="/Minesweeper/mine.png" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-WLV4MG6YP3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-WLV4MG6YP3");
+    </script>
+    <title>Minesweeper</title>
+    <script type="module" crossorigin src="/Minesweeper/assets/index-DCId6S5w.js"></script>
+    <link rel="stylesheet" crossorigin href="/Minesweeper/assets/index-3NukDV0b.css">
+  </head>
+  <body>
+    <header>
+      <h1>MINESWEEPER</h1>
+    </header>
+    <div class="formContainer">
+      <input type="number" id="sizeOfGrid" value="10" min="5" max="20" />
+      <select id="difficulty">
+        <option value="easy" selected>Easy</option>
+        <option value="med">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <button id="flagNumber">16</button>
+      <button id="timer">:</button>
+    </div>
+    <div id="gameOverScreen">
+      <div id="gameOverContent">
+        <h1>Game OVER!</h1>
+        <button class="retryButton">Retry 🔁</button>
+      </div>
+    </div>
+    <div id="youWinScreen">
+      <div id="youWinContent">
+        <h1>You Win!</h1>
+        <button class="retryButton">Retry 🔁</button>
+      </div>
+    </div>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
