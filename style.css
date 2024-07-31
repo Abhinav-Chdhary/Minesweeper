@@ -1,6 +1,7 @@
 :root {
   line-height: 1.5;
   font-weight: 400;
+  font-family: Georgia, serif;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -33,7 +34,6 @@ header {
 }
 h1 {
   line-height: 1.1;
-  font-family: Georgia, serif;
   font-weight: bold;
   font-style: italic;
   font-size: 3em;
@@ -63,6 +63,10 @@ canvas {
   background-color: white;
   display: block;
   margin: 10px auto;
+}
+p{
+  font-family: monospace;
+  font-size: x-large;
 }
 input {
   width: 3em;
@@ -99,6 +103,12 @@ button:focus-visible {
 }
 .retryButton:hover {
   border-color: #ffffff;
+}
+.insContainer {
+  max-width: 500px;
+  text-align: left;
+  margin: 1em auto;
+  font-size: large;
 }
 
 #gameOverScreen,
